@@ -2,5 +2,5 @@
 /Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/obj/Debug/Student.csprojResolveAssemblyReference.cache
 /Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/obj/Debug/Student.csproj.CoreCompileInputs.cache
 /Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/obj/Debug/Student.pdb
-/Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/bin/Debug/Student.exe
-/Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/obj/Debug/Student.exe
+/Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/bin/Debug/Student.dll
+/Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/III. Semestar/C#/Zadaće/2.HomeWork/Raupjc-hw2/Student/obj/Debug/Student.dll
