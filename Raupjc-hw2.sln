@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student", "Student/Student.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2", "Task2\Task2.csproj", "{5EF47441-5C91-4BDC-9501-8FCE05445D55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericListImpl", "GenericListImpl\GenericListImpl.csproj", "{AACE09FF-584A-4A17-8CC4-6422E280EA82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5EF47441-5C91-4BDC-9501-8FCE05445D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EF47441-5C91-4BDC-9501-8FCE05445D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF47441-5C91-4BDC-9501-8FCE05445D55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AACE09FF-584A-4A17-8CC4-6422E280EA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AACE09FF-584A-4A17-8CC4-6422E280EA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AACE09FF-584A-4A17-8CC4-6422E280EA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AACE09FF-584A-4A17-8CC4-6422E280EA82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
