@@ -67,7 +67,7 @@ namespace Student
         }
         
         
-        static void Case1 ()
+        public void Case1 ()
         {
             var topStudents = new List <Student >() 
             {
@@ -78,12 +78,13 @@ namespace Student
             var ivan = new Student("Ivan", jmbag: "001234567");
             
             // false :(
-            bool isIvanTopStudent = topStudents.Contains(ivan); 
-            Console.WriteLine(isIvanTopStudent);
+            bool isIvanTopStudent = topStudents.Contains(ivan);
+            
+
         }
         
         
-        static void Case2 ()
+        void Case2 ()
         {
             var list = new List<Student>() 
             {
@@ -92,10 +93,10 @@ namespace Student
             };
             // 2 :(
             var distinctStudentsCount = list.Distinct().Count();
-            Console.WriteLine(distinctStudentsCount);
+            
         }
         
-        static void Case3 ()
+        void Case3 ()
         {
             var topStudents = new List <Student >() {
                 new Student("Ivan", jmbag:"001234567"), 
@@ -107,17 +108,11 @@ namespace Student
             // false :(
             // == operator is a different operation from .Equals() // Maybe it isn’t such a bad idea to override it as well 
             bool isIvanTopStudent = topStudents.Any(s => s == ivan);
-            Console.WriteLine(isIvanTopStudent);
+            
 
         }
 
-        public static void Main(string[] args)
-        {
-            Case1();
-            Case2();
-            Case3();
 
-        }
         
     }
     
