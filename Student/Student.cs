@@ -23,12 +23,13 @@ namespace Student
         public override bool Equals(object obj)
         {
             Student tmp = obj as Student;
-            if(tmp is Student){
-            if (this == tmp)
+            if (obj is Student)
             {
-                return true;
-            }
-            return false;
+                if (this == (Student) obj)
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }
