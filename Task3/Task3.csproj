@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AACE09FF-584A-4A17-8CC4-6422E280EA82}</ProjectGuid>
+    <ProjectGuid>{2AF580AE-D151-44A1-82E9-600389FCA67D}</ProjectGuid>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GenericListImpl</RootNamespace>
-    <AssemblyName>GenericListImpl</AssemblyName>
+    <RootNamespace>Task3</RootNamespace>
+    <AssemblyName>Task3</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,22 +37,27 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericList.cs" />
-    <Compile Include="IGenericList.cs" />
-    <Compile Include="IIntegerList.cs" />
-    <Compile Include="IntegerList.cs" />
+    <Compile Include="TodoRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GenericListImpl\GenericListImpl.csproj">
+      <Project>{aace09ff-584a-4a17-8cc4-6422e280ea82}</Project>
+      <Name>GenericListImpl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Student\Student.csproj">
       <Project>{e55527bb-058b-4624-ba88-df60d2a6b89a}</Project>
       <Name>Student</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="tmp.txt" />
+    <ProjectReference Include="..\Task2\Task2.csproj">
+      <Project>{5ef47441-5c91-4bdc-9501-8fce05445d55}</Project>
+      <Name>Task2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

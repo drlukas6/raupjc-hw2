@@ -5,25 +5,27 @@ using System.Collections.Generic;
 
 namespace TaskNo1
 {
-    public class GenericList <X> : IGenericList<X>
+    public class GenericList <X> : IGenericList<X> 
     {
         
         private class GenericListEnumerator<X> : IEnumerator<X>
         {
-
-            public GenericList<X> list;            
+            private GenericList<X> list;
             private int position = -1;
-            private int t = 0;
 
             public GenericListEnumerator(GenericList<X> list)
             {
                 this.list = list;
             }
-            
+
+            public void Dispose()
+            {
+            }
+
             public bool MoveNext()
             {
                 position++;
-                return(position < list.Count);
+                return (position < list.Count);
             }
 
             public void Reset()
@@ -33,227 +35,180 @@ namespace TaskNo1
 
             public X Current
             {
-                get {
+                get
+                {
                     try
                     {
                         return list.GetElement(position);
                     }
-                    catch (IndexOutOfRangeException e)
+                    catch (IndexOutOfRangeException)
                     {
-                        throw  new InvalidOperationException();
+                        throw new InvalidOperationException() { };
                     }
-                    
                 }
             }
-
 
             object IEnumerator.Current
             {
                 get { return Current; }
             }
-            
-            public void Dispose()
-            {
-               
-            }
         }
-        
-        
+
         private X[] _internalStorage;
-        private int initialSize;
-        
-        
+
+        /// <summary>
+        /// Creates a Generic list, default size is 4.
+        /// </summary>
+        public GenericList() : this(4)
+        {
+        }
+
+        /// <summary>
+        /// Creates a Generic list with a defined initial size.
+        /// </summary>
+        /// <param name="initialSize">Initial size of the list.</param>
         public GenericList(int initialSize)
         {
-            initialSize = this.initialSize;
-            Console.WriteLine("Default is " + default(X));
-            if (initialSize < 0)
-            {
-                throw new NotSupportedException();
-            }
-            _internalStorage = new X[initialSize];
-            for (int i = 0; i < _internalStorage.Length; i++)
-            {
-                _internalStorage[i] = default(X);
-            }
-            
+            this._internalStorage = new X[initialSize];
         }
 
-        public GenericList()
+        public IEnumerator<X> GetEnumerator()
         {
-            _internalStorage = new X[4];
-            Console.WriteLine("Default is " + default(X));
-            for (int i = 0; i < _internalStorage.Length; i++)
-            {
-                _internalStorage[i] = default(X);
-            }
+            return new GenericListEnumerator<X>(this);
         }
-        
-        
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Adds an item to the collection.
+        /// </summary>
+        /// <param name="item">Item we want to add to the list.</param>
         public void Add(X item)
         {
-            int itemCount = counter(_internalStorage);
-            try
+            if (_internalStorage[_internalStorage.Length - 1] != null)
             {
-                _internalStorage[itemCount] = item;
-                Console.WriteLine("Element: " + item + " Succesfully added!");
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                // Console.WriteLine("Array is not long enough. Attempting to migrate data to a larger one.");
-                // Console.WriteLine("Old array lenght: " + _internalStorage.Length);
-                X[] newArray = new X[(_internalStorage.Length) * 2];
+                X[] temp = new X[_internalStorage.Length * 2];
                 for (int i = 0; i < _internalStorage.Length; i++)
                 {
-                    newArray[i] = _internalStorage[i];
+                    temp[i] = _internalStorage[i];
                 }
-                _internalStorage = newArray;
-                _internalStorage[itemCount] = item;
-                Console.WriteLine("Element: " + item + " Succesfully added!");
-                /*
-                Console.WriteLine("New array lenght: " + _internalStorage.Length + " Elements: ");
-                for (int i = 0; i < _internalStorage.Length; i++)
-                {
-                    Console.WriteLine(_internalStorage[i]);
-                } 
-                */
+                _internalStorage = temp;
             }
+            _internalStorage[this.Count] = item;
         }
 
+        /// <summary>
+        /// Removes the first occurrence of an item from the collection.
+        /// If the item was not found the method does nothing.
+        /// </summary>
+        /// <param name="item">Item we want to remove.</param>
+        /// <returns>Returns if removal was successful.</returns>
         public bool Remove(X item)
         {
-            int position = 0;
-            bool found = false;
+            bool removed = false;
             for (int i = 0; i < _internalStorage.Length; i++)
             {
-                if (_internalStorage[i] == null)
+                if (_internalStorage[i] == null) break;
+                if (!removed)
                 {
-                    return false;
+                    if (_internalStorage[i].Equals(item))
+                    {
+                        removed = true;
+                        if (i == _internalStorage.Length - 1) _internalStorage[i] = default(X);
+                        else _internalStorage[i] = _internalStorage[i + 1];
+                    }
                 }
-                if (_internalStorage[i].Equals(item))
+                else
                 {
-                    position = i;
-                    found = true;
-                    break;
+                    if (i == _internalStorage.Length - 1) _internalStorage[i] = default(X);
+                    else _internalStorage[i] = _internalStorage[i + 1];
                 }
             }
-            if (found)
-            {
-                RemoveAt(position);
-                return true;
-            }
-            else
-            {
-                return found;
-            }
+            return removed;
         }
 
+        /// <summary>
+        /// Removes the item at the given index in the collection.
+        /// </summary>
+        /// <param name="index">Element with the index which we want to remove.</param>
+        /// <returns>Returns true if removal was successful.</returns>
         public bool RemoveAt(int index)
         {
-            try
+            if (index >= _internalStorage.Length || index < 0)
             {
-                
-                for (int i = index+1; i < _internalStorage.Length; i++)
-                {
-                    _internalStorage[i - 1] = _internalStorage[i];
-                }
-                _internalStorage[_internalStorage.Length - 1] = default(X);
-                
-                /*
-                for (int i = 0; i < _internalStorage.Length; i++)
-                {
-                    Console.WriteLine(_internalStorage[i]);
-                }
-                */
-                return true;
+                throw new IndexOutOfRangeException("Index out of range.");
             }
-            catch (IndexOutOfRangeException e)
+            if (index >= this.Count) return false;
+            for (int i = index; i < _internalStorage.Length; i++)
             {
-                Console.WriteLine(e);
-                throw;
-                return false;
+                _internalStorage[i] = (i == _internalStorage.Length - 1) ? default(X) : _internalStorage[i + 1];
             }
+            return true;
         }
 
+        /// <summary>
+        /// Returns the item at the given index in the collection.
+        /// </summary>
+        /// <param name="index">Index of which we want to get an element from.</param>
+        /// <returns>Returns the element at the given index.</returns>
         public X GetElement(int index)
         {
-            try
-            {
-                return _internalStorage[index];
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            if (index >= _internalStorage.Length || index < 0)
+                throw new IndexOutOfRangeException("Index out of range.");
+            return _internalStorage[index];
         }
 
+        /// <summary>
+        /// Returns the index of the item in the collection.
+        /// If item is not found in the collection method returns -1.
+        /// </summary>
+        /// <param name="item">Item we are searching an index of.</param>
+        /// <returns>Returns index of an element in the collection.</returns>
         public int IndexOf(X item)
         {
-            for (int i = 0; i < _internalStorage.Length; i++)
+            for (int i = 0; i < this.Count; i++)
             {
-                if (_internalStorage[i].Equals(item))
-                {
-                    return i;
-                }
+                if (_internalStorage[i].Equals(item)) return i;
             }
             return -1;
         }
 
+        /// <summary>
+        /// Removes all items from the collection.
+        /// </summary>
+        public void Clear()
+        {
+            _internalStorage = new X[_internalStorage.Length];
+        }
+
+        /// <summary>
+        /// Determines whether the collection contains a specific element.
+        /// </summary>
+        /// <param name="item">Searched item</param>
+        /// <returns>Returns whether the collection contains a particular element.</returns>
+        public bool Contains(X item)
+        {
+            return this.IndexOf(item) != -1;
+        }
+
+        /// <summary>
+        /// Returns how many elements the list contains.
+        /// </summary>
         public int Count
         {
             get
             {
-                int counterofItems = counter(_internalStorage);
-                return counterofItems;
-            }
-        }
-        public void Clear()
-        {
-            for (int i = 0; i < _internalStorage.Length; i++)
-            {
-                _internalStorage[i] = default(X);
-            }
-        }
-
-        public bool Contains(X item)
-        {
-            for (int i = 0; i < _internalStorage.Length; i++)
-            {
-                if (_internalStorage[i].Equals(item))
+                for (int i = 0; i < _internalStorage.Length; i++)
                 {
-                    return true;
+                    if (_internalStorage[i] == null) return i;
+                    if (_internalStorage[i].Equals(default(X))) return i;
                 }
+                return _internalStorage.Length;
             }
-            return false;
         }
-        
-        public int counter(X[] arrayToCount)
-        {
-            int len = arrayToCount.Length;
-            int sum = 0;
-            for (int i = 0; i < len; i++)
-            {
-                if (arrayToCount[i] == null)
-                {
-                    break;
-                }
-                if (!arrayToCount[i].Equals(default(X))) 
-                {
-                    sum = sum + 1;
-                }
-            }
-            return sum;
-        }
-       
-        public IEnumerator <X> GetEnumerator() {
-            return new GenericListEnumerator <X> (this); 
-        }
-        
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator(); 
-        }
-
 
     }
 }
