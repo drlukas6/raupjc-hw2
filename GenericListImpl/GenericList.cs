@@ -59,11 +59,6 @@ namespace TaskNo1
         }
         
         
-        
-        
-        
-        
-        
         private X[] _internalStorage;
         private int initialSize;
         
@@ -243,7 +238,7 @@ namespace TaskNo1
                 {
                     break;
                 }
-                else if (!arrayToCount[i].Equals(default(X))) 
+                if (!arrayToCount[i].Equals(default(X))) 
                 {
                     sum = sum + 1;
                 }

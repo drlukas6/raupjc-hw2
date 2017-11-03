@@ -94,7 +94,6 @@ namespace Student
             };
             // 2 :(
             var distinctStudentsCount = list.Distinct().Count();
-            
         }
         
         void Case3 ()
