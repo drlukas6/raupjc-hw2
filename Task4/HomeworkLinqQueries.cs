@@ -15,7 +15,7 @@ namespace Task4
         
         public static University[] Linq2_1(University[] universityArray)
         {
-            University[] ss = universityArray.Where(s => s.Students).ToArray();
+            University[] ss = universityArray.Where(s => s.Students.Where(t=>t.Gender != Gender.Female)).ToArray();
         }
         
         public static University[] Linq2_2(University[] universityArray) 
@@ -25,7 +25,7 @@ namespace Task4
         
         public static Student.Student[] Linq2_3(University[] universityArray)
         {
-            return 
+            throw new NotImplementedException(); 
         }
         
         public static Student.Student[] Linq2_4(University[] universityArray) 

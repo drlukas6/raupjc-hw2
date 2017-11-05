@@ -87,6 +87,15 @@ namespace Task3
             List<TodoItem> secondRepo = _repoTest.GetAll();
             Assert.AreEqual(secondRepo[2].Id,test1.Id);
         }
+
+        [Test]
+        public void ItemTest()
+        {
+            test1 = new TodoItem("asaa");
+            test2 = new TodoItem("sss");
+            test1.DateCompleted = DateTime.Now;
+            Assert.IsTrue(test1.IsCompleted);
+        }
         
         
     }
