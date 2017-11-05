@@ -5,7 +5,7 @@ namespace Task6
 {
     public class Class1
     {
-        public async Task<int> calculate(int a)
+        async static Task<int> calculate(int a)
         {
             int mul = 1;
             for (int i = 1; i <= a; i++)
@@ -20,10 +20,15 @@ namespace Task6
             return sum;
         }
         
-        public async Task<int> FactorialDigitSum(int n)
+        public static async Task<int> FactorialDigitSum(int n)
         {
-            int result = await calculate(n);
+            var task =  calculate(n);
+            int result = await task;
             return result;
         }
+        
+        
+
+        
     }
 }
